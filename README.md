@@ -1,2 +1,2 @@
 # Batman
-Batman Animation Using HTML CSS And JavaScript 
+Batman Animation Using HTML And CSS 
