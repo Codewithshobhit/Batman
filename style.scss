@@ -1,0 +1,74 @@
+$time: 6s;
+$rand: 5000;
+/*
+  feel free to change $rand
+  it changes the amplitude 
+*/
+
+@function rand($val){
+  @if (random($val)) > $val/2{
+    @return percentage(random($val)/100);
+  }@else{
+    @return - percentage(random($val)/100);
+  }  
+}
+
+@mixin animation($name){
+    @-webkit-keyframes #{$name}{
+        @content;
+    }
+    @-moz-keyframes #{$name}{
+        @content;
+    }
+    @-o-keyframes #{$name}{
+        @content;
+    }
+    @keyframes #{$name}{
+        @content;
+    }
+}
+
+@include animation(batman){
+  0%{
+     transform: translate(rand($rand), rand($rand));
+     opacity: 0;
+  }
+  30%, 60%{
+     transform: translate(0);
+     opacity: 1;
+  }
+  100%{
+     transform: translate(rand($rand), rand($rand));
+     opacity: 0;
+  }
+}
+
+body{
+  margin: 0;
+  overflow: hidden;
+  
+  svg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    background: -webkit-radial-gradient(#01579B, #000);
+    background: -o-radial-gradient(#01579B, #000);
+    background: -moz-radial-gradient(#01579B, #000);
+    background: radial-gradient(#01579B, #000);
+    
+    g{
+      -webkit-filter: url(#edge-cleaner);
+      filter: url(#edge-cleaner);
+    }
+    
+    polygon {
+      opacity: 0;
+      transform-box: fill-box;
+      -webkit-animation: batman $time infinite;
+      -moz-animation: batman $time infinite;
+      -o-animation: batman $time infinite;
+      animation: batman $time infinite; 
+    }
+  }
+}
